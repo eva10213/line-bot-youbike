@@ -1,0 +1,15 @@
+{
+    "python.pythonPath":"C:\\Users\\eva\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts\\",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+
+    "[python]":{  // 加入這幾行
+        "editor.formatOnType": true,
+        "editor.formatOnSave": true,
+        "editor.renderIndentGuides": true,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": true,
+        "editor.tabSize": 4
+    }
+}
+
