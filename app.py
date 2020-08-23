@@ -51,7 +51,7 @@ def bike_data_cut1(m):
             msg1+=bike_list_data(k)
         msg1+=str(m)+' '+'總共有'+str(sum)+'筆資料'
     if number==0:
-        msg1+='目前查無'+str(m)+'的資料'
+        msg1+='目前查無'+'" '+str(m)+' "'+'的資料'
 
 
     return msg1
