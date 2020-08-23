@@ -77,8 +77,11 @@ def bike_data_cut2(n):
             sum+=1
             msg1+=bike_list_data(z)
         msg1+=str(n)+' '+'第二筆資料為'+str(sum)+'筆'
-        if sum == 0:
-            msg1+= str(n)+' '+'的全部資料已羅列在上'
+    if sum == 0 and number!= 0:
+        msg1+= str(n)+' '+'的全部資料已羅列在上'
+    if number == 0:
+        msg1+='請輸入正確的關鍵詞'
+
     return msg1
 
 
