@@ -10,8 +10,7 @@ import json
 
 #設定
 url= "https://api.kcg.gov.tw/api/service/Get/b4dd9c40-9027-4125-8666-06bef1756092"
-my_header ={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'}
-html = requests.get(url, hearders = my_header)
+html = requests.get(url)
 html.encoding = 'utf-8'
 dic = json.loads(html.text)
 
