@@ -45,7 +45,7 @@ def bike_data_cut1(m):
             sum+=1
             msg1+=bike_list_data(y)
         msg1+=str(m)+' '+'第一筆資料為'+str(sum)+'筆'
-    if  0<chat_box1<30:
+    if  0<number<30:
         for k in datas_box:
             sum+=1
             msg1+=bike_list_data(k)
