@@ -2,7 +2,7 @@
 from flask import Flask, request, abort
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import (MessageEvent, TextMessage, TextSendMessage)
+from linebot.models import (MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, MessageTemplateAction, ButtonsTemplate, CarouselTemplate, CarouselColumn)
 import requests
 import json
 
@@ -45,7 +45,7 @@ def bike_data_cut1(m):
             sum+=1
             msg1+=bike_list_data(y)
         msg1+=str(m)+' '+'第一筆資料為'+str(sum)+'筆'
-    if  0<number<30:
+    if  number!=0 and chat_box1<30:
         for k in datas_box:
             sum+=1
             msg1+=bike_list_data(k)
@@ -118,15 +118,95 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     text = event.message.text
+    if event.message.text=='你好' or event.message.text=='主選單':
+        line_bot_api.reply_message(event.reply_token,
+        TemplateSendMessage(alt_text='Buttons template',
+        template=ButtonsTemplate(title='高雄分區選擇',text='請選擇你所在高雄的分區',
+            actions=[
+                MessageTemplateAction(label='北高雄',text='北高雄'),
+                MessageTemplateAction(label='南高雄',text='南高雄'),
+                MessageTemplateAction(label='鳳山',text='鳳山'),
+                MessageTemplateAction(label='岡山',text='岡山')
+            ])))
+    
+    elif event.message.text=='北高雄':
+        line_bot_api.reply_message(event.reply_token,
+        TemplateSendMessage(alt_text='Buttons template',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        actions=[
+            MessageTemplateAction(label='左營區',text='左營區'),
+            MessageTemplateAction(label='三民區',text='三民區'),
+            MessageTemplateAction(label='鼓山區',text='鼓山區'),
+            MessageTemplateAction(label='楠梓區',text='楠梓區')
+            ])))
+    elif event.message.text=='南高雄':
+        line_bot_api.reply_message(event.reply_token,
+        [TemplateSendMessage(alt_text='Buttons template',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        actions=[
+            MessageTemplateAction(label='新興區',text='新興區'),
+            MessageTemplateAction(label='前鎮區',text='前鎮區'),
+            MessageTemplateAction(label='前金區',text='前金區'),
+            MessageTemplateAction(label='苓雅區',text='苓雅區')
+            ])),
+        TemplateSendMessage(alt_text='Buttons template',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        actions=[
+            MessageTemplateAction(label='鹽埕區',text='鹽埕區'),
+            MessageTemplateAction(label='旗津區',text='旗津區'),
+            MessageTemplateAction(label='小港區',text='小港區')]))])
+    elif event.message.text=='鳳山':
+        line_bot_api.reply_message(event.reply_token,
+        [TemplateSendMessage(alt_text='Buttons template',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        actions=[
+            MessageTemplateAction(label='鳳山區',text='鳳山區'),
+            MessageTemplateAction(label='大寮區',text='大寮區'),
+            MessageTemplateAction(label='大社區',text='大社區'),
+            MessageTemplateAction(label='鳥松區',text='鳥松區')
+            ])),
+        TemplateSendMessage(alt_text='Buttons template',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        actions=[
+            MessageTemplateAction(label='林園區',text='林園區'),
+            MessageTemplateAction(label='大樹區',text='大樹區'),
+            MessageTemplateAction(label='仁武區',text='仁武區')
+            ]))]) 
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        [TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text))]
-        )
+    elif event.message.text=='岡山':
+        line_bot_api.reply_message(event.reply_token,
+        [TemplateSendMessage(alt_text='Buttons template',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        actions=[
+            MessageTemplateAction(label='橋頭區',text='橋頭區'),
+            MessageTemplateAction(label='燕巢區',text='燕巢區'),
+            MessageTemplateAction(label='茄萣區',text='茄萣區'),
+            MessageTemplateAction(label='梓官區',text='梓官區')
+            ])),
+        TemplateSendMessage(alt_text='Buttons template',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        actions=[
+            MessageTemplateAction(label='路竹區',text='路竹區'),
+            MessageTemplateAction(label='永安區',text='永安區'),
+            MessageTemplateAction(label='彌陀區',text='彌陀區')
+            ]))])
+
+    else:
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text))])
+        
+
 
 
 if __name__=='__main__':
     app.run()
+
+
+
+
+
+
+
+
 
 
 
