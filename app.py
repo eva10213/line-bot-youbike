@@ -125,8 +125,8 @@ def handle_message(event):
             actions=[
                 MessageTemplateAction(label='北高雄',text='北高雄'),
                 MessageTemplateAction(label='南高雄',text='南高雄'),
-                MessageTemplateAction(label='鳳山',text='鳳山'),
-                MessageTemplateAction(label='岡山',text='岡山')
+                MessageTemplateAction(label='大鳳山',text='大鳳山'),
+                MessageTemplateAction(label='大岡山',text='大岡山')
             ])))
     
     elif event.message.text=='北高雄':
