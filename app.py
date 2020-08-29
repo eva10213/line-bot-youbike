@@ -155,7 +155,7 @@ def handle_message(event):
             MessageTemplateAction(label='鹽埕區',text='鹽埕區'),
             MessageTemplateAction(label='旗津區',text='旗津區'),
             MessageTemplateAction(label='小港區',text='小港區')]))])
-    elif event.message.text=='鳳山':
+    elif event.message.text=='大鳳山':
         line_bot_api.reply_message(event.reply_token,
         [TemplateSendMessage(alt_text='Buttons template',
         template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
@@ -173,7 +173,7 @@ def handle_message(event):
             MessageTemplateAction(label='仁武區',text='仁武區')
             ]))]) 
 
-    elif event.message.text=='岡山':
+    elif event.message.text=='大岡山':
         line_bot_api.reply_message(event.reply_token,
         [TemplateSendMessage(alt_text='Buttons template',
         template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
