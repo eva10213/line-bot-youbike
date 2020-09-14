@@ -121,7 +121,7 @@ def handle_message(event):
     if event.message.text=='你好' or event.message.text=='主選單':
         line_bot_api.reply_message(event.reply_token,
         TemplateSendMessage(alt_text='Buttons template',
-        template=ButtonsTemplate(title='高雄分區選擇',text='請選擇你所在高雄的分區',
+        template=ButtonsTemplate(title='高雄分區選擇',text='請選擇你所在高雄的分區',thumbnail_image_url='https://imgur.com/a/i90gWWz.jpg',
             actions=[
                 MessageTemplateAction(label='北高雄',text='北高雄'),
                 MessageTemplateAction(label='南高雄',text='南高雄'),
@@ -132,7 +132,7 @@ def handle_message(event):
     elif event.message.text=='北高雄':
         line_bot_api.reply_message(event.reply_token,
         TemplateSendMessage(alt_text='Buttons template',
-        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',thumbnail_image_url='https://imgur.com/a/i90gWWz.jpg',
         actions=[
             MessageTemplateAction(label='左營區',text='左營區'),
             MessageTemplateAction(label='三民區',text='三民區'),
@@ -142,7 +142,7 @@ def handle_message(event):
     elif event.message.text=='南高雄':
         line_bot_api.reply_message(event.reply_token,
         [TemplateSendMessage(alt_text='Buttons template',
-        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',thumbnail_image_url='https://imgur.com/a/i90gWWz.jpg',
         actions=[
             MessageTemplateAction(label='新興區',text='新興區'),
             MessageTemplateAction(label='前鎮區',text='前鎮區'),
@@ -150,7 +150,7 @@ def handle_message(event):
             MessageTemplateAction(label='苓雅區',text='苓雅區')
             ])),
         TemplateSendMessage(alt_text='Buttons template',
-        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',thumbnail_image_url='https://imgur.com/a/i90gWWz.jpg',
         actions=[
             MessageTemplateAction(label='鹽埕區',text='鹽埕區'),
             MessageTemplateAction(label='旗津區',text='旗津區'),
@@ -158,7 +158,7 @@ def handle_message(event):
     elif event.message.text=='大鳳山':
         line_bot_api.reply_message(event.reply_token,
         [TemplateSendMessage(alt_text='Buttons template',
-        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',thumbnail_image_url='https://imgur.com/a/i90gWWz.jpg',
         actions=[
             MessageTemplateAction(label='鳳山區',text='鳳山區'),
             MessageTemplateAction(label='大寮區',text='大寮區'),
@@ -166,7 +166,7 @@ def handle_message(event):
             MessageTemplateAction(label='鳥松區',text='鳥松區')
             ])),
         TemplateSendMessage(alt_text='Buttons template',
-        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',thumbnail_image_url='https://imgur.com/a/i90gWWz.jpg',
         actions=[
             MessageTemplateAction(label='林園區',text='林園區'),
             MessageTemplateAction(label='大樹區',text='大樹區'),
@@ -176,7 +176,7 @@ def handle_message(event):
     elif event.message.text=='大岡山':
         line_bot_api.reply_message(event.reply_token,
         [TemplateSendMessage(alt_text='Buttons template',
-        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',thumbnail_image_url='https://imgur.com/a/i90gWWz.jpg',
         actions=[
             MessageTemplateAction(label='橋頭區',text='橋頭區'),
             MessageTemplateAction(label='燕巢區',text='燕巢區'),
@@ -184,7 +184,7 @@ def handle_message(event):
             MessageTemplateAction(label='梓官區',text='梓官區')
             ])),
         TemplateSendMessage(alt_text='Buttons template',
-        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',thumbnail_image_url='https://imgur.com/a/i90gWWz.jpg',
         actions=[
             MessageTemplateAction(label='路竹區',text='路竹區'),
             MessageTemplateAction(label='永安區',text='永安區'),
