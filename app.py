@@ -121,7 +121,7 @@ def handle_message(event):
     if event.message.text=='你好' or event.message.text=='主選單':
         line_bot_api.reply_message(event.reply_token,
         TemplateSendMessage(alt_text='Buttons template',
-        template=ButtonsTemplate(title='高雄分區選擇',text='請選擇你所在高雄的分區',thumbnail_image_url='https://imgur.com/a/i90gWWz.jpg',
+        template=ButtonsTemplate(title='高雄分區選擇',text='請選擇你所在高雄的分區',thumbnail_image_url='https://imgur.com/a/i90gWWz',
             actions=[
                 MessageTemplateAction(label='北高雄',text='北高雄'),
                 MessageTemplateAction(label='南高雄',text='南高雄'),
@@ -142,7 +142,7 @@ def handle_message(event):
     elif event.message.text=='南高雄':
         line_bot_api.reply_message(event.reply_token,
         [TemplateSendMessage(alt_text='Buttons template',
-        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',thumbnail_image_url='https://imgur.com/a/i90gWWz.jpg',
+        template=ButtonsTemplate(title='Youbike查詢',text='選擇你要查詢的地區',thumbnail_image_url='https://imgur.com/a/i90gWWz',
         actions=[
             MessageTemplateAction(label='新興區',text='新興區'),
             MessageTemplateAction(label='前鎮區',text='前鎮區'),
