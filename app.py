@@ -33,17 +33,17 @@ def bike_list_data(dictt):
 
 def bike_data_cut1(m):
     msg1 = ''
-    datas = dic['data']['retVal']
+    datas = dic['data']['retVal'] # 獲取youbike站點資訊
     datas_box = []       
     sum=0
     for i in datas:
-        a = i['sarea']
+        a = i['sarea'] # 跑出地區 例如：鳳山區
         x = a[:2]
         if m.strip() ==a or m.strip()==x:
-            datas_box.append(i)
+            datas_box.append(i) # 跑出站點資訊
 
-    number = len(datas_box)
-    chat_box1 = number//2
+    number = len(datas_box) # 得知那個地區有幾個站點
+    chat_box1 = number//2 # 將資料除於2
 
     if number >=35:
         for y in datas_box[0:35]:
@@ -110,10 +110,37 @@ def bike_data_cut3(m):
     chat_box1 = number//2
     chat_box2 = number - chat_box1
     if number>61 :
-        for y in datas_box[69:]:
+        for y in datas_box[69:100]:
             sum+=1
             msg1+=bike_list_data(y)
         msg1+=str(m)+' '+'第三筆資料為'+str(sum)+'筆\n\n'+str(m)+'總共有'+' '+str(number)+'筆資料'
+
+    if number==0:
+        msg1+='目前查無'+'" '+str(m)+' "'+'的資料'
+
+
+    return msg1
+
+
+def bike_data_cut4(m):
+    msg1 = ''
+    datas = dic['data']['retVal']
+    datas_box = []       
+    sum=0
+    for i in datas:
+        a = i['sarea']
+        x = a[:2]
+        if m.strip() ==a or m.strip()==x:
+            datas_box.append(i)
+
+    number = len(datas_box)
+    chat_box1 = number//2
+    chat_box2 = number - chat_box1
+    if number>100 :
+        for y in datas_box[100:]:
+            sum+=1
+            msg1+=bike_list_data(y)
+        msg1+=str(m)+' '+'第四筆資料為'+str(sum)+'筆\n\n'+str(m)+'總共有'+' '+str(number)+'筆資料'
 
     if number==0:
         msg1+='目前查無'+'" '+str(m)+' "'+'的資料'
@@ -232,7 +259,7 @@ def handle_message(event):
             ]))])
 
     elif event.message.text in (data_cut3):
-        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut3(text))])
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut3(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut4(text))])
     elif event.message.text in (data_cut2):
         line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text))])
     else :
