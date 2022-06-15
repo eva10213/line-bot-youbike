@@ -10,16 +10,16 @@ import json
 
 #設定
 url= "https://api.kcg.gov.tw/api/service/Get/b4dd9c40-9027-4125-8666-06bef1756092"
-html = ''
-while str(html) != '<Response [200]>':
-    html = requests.get(url)
-    html.encoding = 'utf-8'
+html = ""
+html = requests.get(url)
+html.encoding = 'utf-8'
+while html.status_code != 200:
+    continue
 dic = json.loads(html.text)
 
 
 data_cut2 = ['前鎮區','鼓山區','苓雅區','前鎮','鼓山','苓雅','楠梓區','楠梓']
-data_cut3 = ['鳳山區','鳳山']
-data_cut4 = ['左營區','三民區','左營','三民']
+data_cut3 = ['左營區','三民區','鳳山區','左營','三民','鳳山']
 #主程式    
 def bike_list_data(dictt):
     a = dictt['sarea']
@@ -139,8 +139,8 @@ def bike_data_cut4(m):
     number = len(datas_box)
     chat_box1 = number//2
     chat_box2 = number - chat_box1
-    if number>=100 :
-        for y in datas_box[100:129]:
+    if number>100 :
+        for y in datas_box[100:]:
             sum+=1
             msg1+=bike_list_data(y)
         msg1+=str(m)+' '+'第四筆資料為'+str(sum)+'筆\n\n'+str(m)+'總共有'+' '+str(number)+'筆資料'
@@ -152,31 +152,7 @@ def bike_data_cut4(m):
     return msg1
 
 
-def bike_data_cut5(m):
-    msg1 = ''
-    datas = dic['data']['retVal']
-    datas_box = []       
-    sum=0
-    for i in datas:
-        a = i['sarea']
-        x = a[:2]
-        if m.strip() ==a or m.strip()==x:
-            datas_box.append(i)
 
-    number = len(datas_box)
-    chat_box1 = number//2
-    chat_box2 = number - chat_box1
-    if number>=129 :
-        for y in datas_box[129:]:
-            sum+=1
-            msg1+=bike_list_data(y)
-        msg1+=str(m)+' '+'第五筆資料為'+str(sum)+'筆\n\n'+str(m)+'總共有'+' '+str(number)+'筆資料'
-
-    if number==0:
-        msg1+='目前查無'+'" '+str(m)+' "'+'的資料'
-
-
-    return msg1
 
 
 
@@ -286,11 +262,9 @@ def handle_message(event):
             ]))])
 
     elif event.message.text in (data_cut3):
-        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut3(text)),TextSendMessage(text=bike_data_cut4(text)),TextSendMessage(text=bike_data_cut5(text))])
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut3(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut4(text))])
     elif event.message.text in (data_cut2):
         line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text))])
-    elif event.message.text in (data_cut4):
-        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut3(text)),TextSendMessage(text=bike_data_cut4(text))])
     else :
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bike_data_cut1(text)))
 
