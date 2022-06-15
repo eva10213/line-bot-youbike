@@ -1,4 +1,5 @@
 #模組
+from asyncio import events
 from flask import Flask, request, abort
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import InvalidSignatureError
@@ -207,12 +208,14 @@ def callback():
 
     return 'OK'
 
-
+ccc = 0
 # Messaging settings 訊息由 LineBot發送訊息到其他使用者的設定
 @handler.add(MessageEvent, message=TextMessage)
+
 def handle_message(event):
     text = event.message.text
     if event.message.text=='你好' or event.message.text=='主選單':
+        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求'))
         line_bot_api.reply_message(event.reply_token,
         TemplateSendMessage(alt_text='Buttons template',
         template=ButtonsTemplate(title='高雄分區選擇',text='請選擇你所在高雄的分區',thumbnail_image_url='https://imgur.com/cFxWxyJ.jpg',
@@ -284,7 +287,7 @@ def handle_message(event):
             MessageTemplateAction(label='永安區',text='永安區'),
             MessageTemplateAction(label='彌陀區',text='彌陀區')
             ]))])
-
+    
     elif event.message.text in (data_cut3):
         line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut3(text)),TextSendMessage(text=bike_data_cut4(text)),TextSendMessage(text=bike_data_cut5(text))])
     elif event.message.text in (data_cut2):
