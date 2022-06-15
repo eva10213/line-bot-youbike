@@ -12,10 +12,16 @@ import json
 #設定
 url= "https://api.kcg.gov.tw/api/service/Get/b4dd9c40-9027-4125-8666-06bef1756092"
 html = ''
-while str(html) != '<Response [200]>':
-    html = requests.get(url)
-    html.encoding = 'utf-8'
-dic = json.loads(html.text)
+dic = ""
+
+def get_url():
+    global html
+    global dic    
+    while str(html) != '<Response [200]>':
+
+        html = requests.get(url)
+        html.encoding = 'utf-8'
+    dic = json.loads(html.text)
 
 
 data_cut2 = ['前鎮區','鼓山區','苓雅區','前鎮','鼓山','苓雅','楠梓區','楠梓']
@@ -23,6 +29,7 @@ data_cut3 = ['鳳山區','鳳山']
 data_cut4 = ['左營區','三民區','左營','三民']
 #主程式    
 def bike_list_data(dictt):
+    
     a = dictt['sarea']
     b = dictt['sna']
     c = b[11:]
@@ -36,6 +43,7 @@ def bike_list_data(dictt):
     return msg1
 
 def bike_data_cut1(m):
+    
     msg1 = ''
     datas = dic['data']['retVal'] # 獲取youbike站點資訊
     datas_box = []       
@@ -68,6 +76,7 @@ def bike_data_cut1(m):
 
 
 def bike_data_cut2(n):
+    
     msg1 = ''
     datas = dic['data']['retVal']
     datas_box = []
@@ -100,6 +109,7 @@ def bike_data_cut2(n):
     return msg1
 
 def bike_data_cut3(m):
+    
     msg1 = ''
     datas = dic['data']['retVal']
     datas_box = []       
@@ -127,6 +137,7 @@ def bike_data_cut3(m):
 
 
 def bike_data_cut4(m):
+    
     msg1 = ''
     datas = dic['data']['retVal']
     datas_box = []       
@@ -154,6 +165,7 @@ def bike_data_cut4(m):
 
 
 def bike_data_cut5(m):
+    
     msg1 = ''
     datas = dic['data']['retVal']
     datas_box = []       
@@ -215,7 +227,7 @@ ccc = 0
 def handle_message(event):
     text = event.message.text
     if event.message.text=='你好' or event.message.text=='主選單':
-        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求'))
+        
         line_bot_api.reply_message(event.reply_token,
         TemplateSendMessage(alt_text='Buttons template',
         template=ButtonsTemplate(title='高雄分區選擇',text='請選擇你所在高雄的分區',thumbnail_image_url='https://imgur.com/cFxWxyJ.jpg',
@@ -225,7 +237,7 @@ def handle_message(event):
                 MessageTemplateAction(label='大鳳山',text='大鳳山'),
                 MessageTemplateAction(label='大岡山',text='大岡山')
             ])))
-    
+
     elif event.message.text=='北高雄':
         line_bot_api.reply_message(event.reply_token,
         TemplateSendMessage(alt_text='Buttons template',
@@ -289,12 +301,20 @@ def handle_message(event):
             ]))])
     
     elif event.message.text in (data_cut3):
+        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求，若等待時間過長，請再試一次'))
+        get_url()
         line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut3(text)),TextSendMessage(text=bike_data_cut4(text)),TextSendMessage(text=bike_data_cut5(text))])
     elif event.message.text in (data_cut2):
+        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求，若等待時間過長，請再試一次'))
+        get_url()
         line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text))])
     elif event.message.text in (data_cut4):
+        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求，若等待時間過長，請再試一次'))
+        get_url()
         line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut3(text)),TextSendMessage(text=bike_data_cut4(text))])
     else :
+        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求，若等待時間過長，請再試一次'))
+        get_url()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bike_data_cut1(text)))
 
 if __name__=='__main__':
