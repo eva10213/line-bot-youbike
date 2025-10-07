@@ -6,13 +6,18 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import (MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, MessageTemplateAction, ButtonsTemplate, CarouselTemplate, CarouselColumn)
 import requests
 import json
+from dotenv import load_dotenv
+import os
 
-
+load_dotenv()
+LINE_BOT_API_KEY = os.getenv("LINE_BOT_API_KEY")
+WEBHOOK_API_KEY = os.getenv("WEBHOOK_API_KEY")
 
 #設定
 url= "https://api.kcg.gov.tw/api/service/Get/b4dd9c40-9027-4125-8666-06bef1756092"
 html = ''
 dic = ""
+
 
 def get_url():
     global html
@@ -27,6 +32,7 @@ def get_url():
 data_cut2 = ['前鎮區','鼓山區','苓雅區','前鎮','鼓山','苓雅','楠梓區','楠梓']
 data_cut3 = ['鳳山區','鳳山']
 data_cut4 = ['左營區','三民區','左營','三民']
+
 #主程式    
 def bike_list_data(dictt):
     
@@ -198,8 +204,8 @@ def bike_data_cut5(m):
 app=Flask(__name__)
 
 # LINE 聊天機器人的基本資料
-line_bot_api = LineBotApi('2TH7OQO+hOsOfaMNryPv//Im68AXnrcikmcLHs+K2+CI7XTUtXQYk++kjCn4STkLjIf8+/guGQ6BNcGhkJGWiE2LCep4Lp+h61SV4a1FxFKzBncDIeHv3pIV8Df5CV9FzqnIuIKtcnJGosOuf7BKaAdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('03a3c1d2da591c85486cf28a9fe677a7')
+line_bot_api = LineBotApi(LINE_BOT_API_KEY)
+handler = WebhookHandler(WEBHOOK_API_KEY)
 
 
 @app.route("/callback", methods=['POST'])
