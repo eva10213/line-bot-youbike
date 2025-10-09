@@ -17,19 +17,27 @@ WEBHOOK_API_KEY = os.getenv("WEBHOOK_API_KEY")
 url= "https://api.kcg.gov.tw/api/service/Get/b4dd9c40-9027-4125-8666-06bef1756092"
 html = ''
 dic = ""
-
+headers = {
+    "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+}
 
 def get_url():
     global html
     global dic    
-
-    html = requests.get(url)
-    if html.status_code == 200:
-        html.encoding = 'utf-8'
-        dic = json.loads(html.text)
-        return True
-    else :
+    try:
+        html = requests.get(url,headers, timeout=10)
+        if html.status_code == 200:
+            html.encoding = 'utf-8'
+            dic = json.loads(html.text)
+            return True
+        else :
+            return False
+        
+    except Exception as e:
+        print(f"API 資料抓取出現問題:{e}")
         return False
+    
+
     
     
 
