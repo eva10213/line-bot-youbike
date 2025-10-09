@@ -22,11 +22,16 @@ dic = ""
 def get_url():
     global html
     global dic    
-    while str(html) != '<Response [200]>':
 
-        html = requests.get(url)
+    html = requests.get(url)
+    if html.status_code == 200:
         html.encoding = 'utf-8'
-    dic = json.loads(html.text)
+        dic = json.loads(html.text)
+        return True
+    else :
+        return False
+    
+    
 
 
 data_cut2 = ['前鎮區','鼓山區','苓雅區','前鎮','鼓山','苓雅','楠梓區','楠梓']
@@ -307,21 +312,32 @@ def handle_message(event):
             ]))])
     
     elif event.message.text in (data_cut3):
-        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求，若等待時間過長，請再試一次'))
-        get_url()
-        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut3(text)),TextSendMessage(text=bike_data_cut4(text)),TextSendMessage(text=bike_data_cut5(text))])
+        # line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求，若等待時間過長，請再試一次'))
+        if get_url():
+            line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut3(text)),TextSendMessage(text=bike_data_cut4(text)),TextSendMessage(text=bike_data_cut5(text))])
+        else:
+            line_bot_api.push_message(event.source.user_id, TextSendMessage(text='API請求失敗，請稍後再試'))
+    
     elif event.message.text in (data_cut2):
-        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求，若等待時間過長，請再試一次'))
-        get_url()
-        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text))])
+        # line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求，若等待時間過長，請再試一次'))
+        if get_url():
+            line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text))])
+        else:
+            line_bot_api.push_message(event.source.user_id, TextSendMessage(text='API請求失敗，請稍後再試'))    
+    
     elif event.message.text in (data_cut4):
-        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求，若等待時間過長，請再試一次'))
-        get_url()
-        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut3(text)),TextSendMessage(text=bike_data_cut4(text))])
+        # line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求，若等待時間過長，請再試一次'))
+        if get_url():
+            line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=bike_data_cut1(text)),TextSendMessage(text=bike_data_cut2(text)),TextSendMessage(text=bike_data_cut3(text)),TextSendMessage(text=bike_data_cut4(text))])
+        else:
+            line_bot_api.push_message(event.source.user_id, TextSendMessage(text='API請求失敗，請稍後再試'))    
+    
     else :
-        line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求，若等待時間過長，請再試一次'))
-        get_url()
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bike_data_cut1(text)))
+        # line_bot_api.push_message(event.source.user_id, TextSendMessage(text='請稍等一下，正在向API發送請求，若等待時間過長，請再試一次'))
+        if get_url():
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bike_data_cut1(text)))
+        else:
+            line_bot_api.push_message(event.source.user_id, TextSendMessage(text='API請求失敗，請稍後再試'))
 
 if __name__=='__main__':
     app.run()
