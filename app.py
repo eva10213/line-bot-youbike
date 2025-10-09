@@ -51,7 +51,7 @@ def bike_list_data(dictt):
 def bike_data_cut1(m):
     
     msg1 = ''
-    datas = dic['data']['retVal'] # 獲取youbike站點資訊
+    datas = dic['data']['data']['retVal'] # 獲取youbike站點資訊
     datas_box = []       
     sum=0
     for i in datas:
@@ -84,7 +84,7 @@ def bike_data_cut1(m):
 def bike_data_cut2(n):
     
     msg1 = ''
-    datas = dic['data']['retVal']
+    datas = dic['data']['data']['retVal']
     datas_box = []
         
     sum = 0
@@ -117,7 +117,7 @@ def bike_data_cut2(n):
 def bike_data_cut3(m):
     
     msg1 = ''
-    datas = dic['data']['retVal']
+    datas = dic['data']['data']['retVal']
     datas_box = []       
     sum=0
     for i in datas:
@@ -145,7 +145,7 @@ def bike_data_cut3(m):
 def bike_data_cut4(m):
     
     msg1 = ''
-    datas = dic['data']['retVal']
+    datas = dic['data']['data']['retVal']
     datas_box = []       
     sum=0
     for i in datas:
@@ -173,7 +173,7 @@ def bike_data_cut4(m):
 def bike_data_cut5(m):
     
     msg1 = ''
-    datas = dic['data']['retVal']
+    datas = dic['data']['data']['retVal']
     datas_box = []       
     sum=0
     for i in datas:
