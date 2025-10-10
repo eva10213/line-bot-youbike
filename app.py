@@ -348,7 +348,8 @@ def handle_message(event):
             line_bot_api.push_message(event.source.user_id, TextSendMessage(text='API請求失敗，請稍後再試'))
 
 if __name__=='__main__':
-    app.run()
+    port = int(os.getenv("PORT",8080))
+    app.run(host='0.0.0.0',port=port)
 
 
 
